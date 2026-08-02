@@ -4,6 +4,12 @@
 
 Проект включает загрузку данных в PostgreSQL, страницу `/companies` на Next.js, анализ `review.csv` и черновик ответов для блока про LLM-стек.
 
+Проект оформлен как npm workspaces:
+
+- корневой `package.json` — единая точка запуска команд;
+- `frontend/package.json` — зависимости и команды Next.js;
+- `scripts/package.json` — зависимости и команды импорта/анализа данных.
+
 ## Навигация
 
 - [Быстрый запуск](#быстрый-запуск)
@@ -193,6 +199,9 @@ npm audit --omit=dev
 ## Структура файлов
 
 ```text
+package.json                         root workspace и общие команды запуска
+frontend/package.json                зависимости и команды фронтенда
+scripts/package.json                 зависимости и команды data/db-скриптов
 frontend/app/companies/page.tsx       страница компаний
 frontend/app/companies/loading.tsx    спинер и skeleton во время загрузки
 frontend/app/companies/error.tsx      fallback при ошибке роута

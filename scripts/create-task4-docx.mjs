@@ -2,9 +2,12 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const sourcePath = path.resolve(process.cwd(), 'TASK4_ANSWERS_DRAFT.md');
-const outputPath = path.resolve(process.cwd(), 'task4_answers.docx');
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(scriptDir, '..');
+const sourcePath = path.join(projectRoot, 'TASK4_ANSWERS_DRAFT.md');
+const outputPath = path.join(projectRoot, 'task4_answers.docx');
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'task4-docx-'));
 
 function escapeXml(value) {
@@ -27,7 +30,7 @@ function markdownToWordXml(markdown) {
     .map((line) => {
       if (line.startsWith('# ')) return paragraph(line.slice(2), 'Title');
       if (line.startsWith('## ')) return paragraph(line.slice(3), 'Heading1');
-      if (line.startsWith('- ')) return paragraph(`• ${line.slice(2)}`);
+      if (line.startsWith('- ')) return paragraph(`- ${line.slice(2)}`);
       if (!line.trim()) return '<w:p/>';
       return paragraph(line);
     })

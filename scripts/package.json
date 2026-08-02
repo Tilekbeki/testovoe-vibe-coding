@@ -1,0 +1,16 @@
+{
+  "name": "@polza-test/scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:schema": "node --env-file=../.env apply-schema.mjs",
+    "db:load": "node --env-file=../.env load-companies.mjs",
+    "db:load-review": "node --env-file=../.env load-review.mjs",
+    "data:analyze": "node analyze-data.mjs",
+    "task4:docx": "node create-task4-docx.mjs"
+  },
+  "dependencies": {
+    "pg": "8.13.1"
+  }
+}

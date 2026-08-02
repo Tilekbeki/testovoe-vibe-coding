@@ -1,6 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(scriptDir, '..');
 
 function readEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return {};
@@ -30,11 +34,11 @@ function readEnvFile(filePath) {
 }
 
 const [command = 'dev', ...args] = process.argv.slice(2);
-const nextBin = path.resolve(process.cwd(), 'node_modules/next/dist/bin/next');
-const projectDir = path.resolve(process.cwd(), 'frontend');
+const nextBin = path.join(projectRoot, 'node_modules/next/dist/bin/next');
+const projectDir = path.join(projectRoot, 'frontend');
 const env = {
   ...process.env,
-  ...readEnvFile(path.resolve(process.cwd(), '.env'))
+  ...readEnvFile(path.join(projectRoot, '.env'))
 };
 
 const child = spawn(process.execPath, [nextBin, command, projectDir, ...args], {

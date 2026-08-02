@@ -1,7 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export const DATA_DIR = path.resolve(process.cwd(), 'data');
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+
+export const PROJECT_ROOT = path.resolve(currentDir, '../..');
+export const DATA_DIR = path.join(PROJECT_ROOT, 'data');
 
 export function requiredEnv(name) {
   const value = process.env[name];
