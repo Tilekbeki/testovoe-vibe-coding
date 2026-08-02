@@ -1,0 +1,34 @@
+{
+  "name": "polza-companies-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/run-next.mjs dev",
+    "dev:3001": "node scripts/run-next.mjs dev --hostname 127.0.0.1 --port 3001",
+    "build": "node scripts/run-next.mjs build",
+    "start": "node scripts/run-next.mjs start",
+    "lint": "tsc -p frontend/tsconfig.json --noEmit",
+    "db:schema": "node --env-file=.env scripts/apply-schema.mjs",
+    "db:load": "node --env-file=.env scripts/load-companies.mjs",
+    "db:load-review": "node --env-file=.env scripts/load-review.mjs",
+    "data:analyze": "node scripts/analyze-data.mjs"
+  },
+  "dependencies": {
+    "next": "^16.2.12",
+    "pg": "8.13.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.25",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.4",
+    "@types/pg": "8.11.11",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "typescript": "5.7.3"
+  }
+}
